@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Regalito</title>
+  <style>
+    :root {
+      --wrapper-color: #121212; 
+      --wrapper-inner: #222222;
+      --ribbon-color: #e60012;
+      --accent-gold: #ffcc00;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+    margin: 0;
+    padding: 15px 10px;
+    min-height: 100vh;
+    background-image: url('fondo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+    overflow-x: hidden;
+    }
+
+    .header {
+      text-align: center;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      margin: 5;
+  color: #00ff00;
+  font-size: 3rem;
+  -webkit-text-stroke: 2.1px #000000; 
+  text-shadow: 
+  0 0 4px  rgba(255, 0, 127, 0.9),  
+    0 0 10px rgba(255, 0, 127, 0.8),  
+    0 0 20px rgba(255, 0, 127, 0.6),  
+    0 0 40px rgba(255, 0, 127, 0.4),  
+    0 0 70px rgba(255, 0, 127, 0.2);
+    }
+
+    p.subtitle {
+       margin: 1px;
+  color: #00ff00;
+  font-size: 1.8rem;
+  -webkit-text-stroke: 1px #000000; 
+  text-shadow:
+  0 0 4px  rgba(255, 0, 127, 0.9),  
+    0 0 10px rgba(255, 0, 127, 0.8),  
+    0 0 20px rgba(255, 0, 127, 0.6),  
+    0 0 40px rgba(255, 0, 127, 0.4),  
+    0 0 70px rgba(255, 0, 127, 0.2);
+    }
+
+.bouquet-container {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  height: 450px;
+  margin: 90px auto 0 auto; 
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.wrapper-cone-back {
+  position: absolute;
+  top: 220px; 
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  height: 200px;
+  background-color: rgba(0, 255, 0, 0.85);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  z-index: 1;
+}
+
+.wrapper-cone-left {
+  position: absolute;
+  top: 240px; 
+  left: 50%;
+  transform: translateX(-50%);
+  width: 280px;
+  height: 170px;
+  background-color: rgba(120, 40, 140, 0.9);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  z-index: 3;
+}
+
+.wrapper-cone-front {
+  position: absolute;
+  top: 260px; 
+  left: 50%;
+  transform: translateX(-50%);
+  width: 240px;
+  height: 140px;
+  background-color: rgba(255, 165, 0, 0.95);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  z-index: 4;
+}
+
+.cars-grid {
+  position: absolute;
+  top: -30px !important;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100% !important;
+  height: 230px;
+  overflow: visible !important; 
+  z-index: 2 !important;
+  display: flex;
+  justify-content: center;
+}
+
+.hw-card {
+  position: absolute;
+  width: 125px;  
+  height: 185px; 
+  background: linear-gradient(180deg, #115393 0%, #00152b 100%);
+  border: 2px solid var(--accent-gold);
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px;
+  transition: transform 0.3s ease, z-index 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  z-index: 2 !important;
+}
+
+.card-1 { transform: rotate(-28deg) translate(-140px, -10px); }
+.card-2 { transform: rotate(-14deg) translate(-70px, -20px); }
+.card-3 { transform: rotate(0deg) translate(0px, -25px); }
+.card-4 { transform: rotate(14deg) translate(70px, -20px); }
+.card-5 { transform: rotate(28deg) translate(140px, -10px); }
+
+.bouquet-ribbon {
+  position: absolute;
+  top: 390px; 
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+}
+
+.ribbon-knot {
+  width: 24px;
+  height: 20px;
+  background: #e60012;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px rgba(230, 0, 18, 0.6);
+  position: relative;
+  z-index: 2;
+}
+
+.ribbon-loop-left, .ribbon-loop-right {
+  width: 28px;
+  height: 24px;
+  border: 4px solid #e60012;
+  border-radius: 50%;
+  position: absolute;
+  top: -2px;
+}
+.ribbon-loop-left { left: -22px; transform: rotate(-15deg); }
+.ribbon-loop-right { right: -22px; transform: rotate(15deg); }
+
+.ribbon-tail-left, .ribbon-tail-right {
+  position: absolute;
+  top: 15px;
+  width: 10px;
+  height: 35px;
+  background: #e60012;
+  border-radius: 2px;
+}
+.ribbon-tail-left { left: -8px; transform: rotate(20deg); }
+.ribbon-tail-right { right: -8px; transform: rotate(-20deg); }
+
+    .cars-grid {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 250px; 
+  overflow: hidden; 
+  z-index: 2 !important;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.hw-card {
+  position: absolute;
+  width: 125px;
+  height: 185px;
+  background: linear-gradient(180deg, #115393 0%, #00152b 100%); 
+  border: 2px solid var(--accent-gold, #ffd700);
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 6px;
+  box-sizing: border-box;
+  transition: transform 0.3s ease, z-index 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.hw-card:hover,
+.hw-card.active {
+  transform: translateY(-25px) scale(1.18) !important;
+  z-index: 100 !important;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 12px 25px rgba(0, 0, 0, 0.9) !important;
+}
+
+.hw-header {
+  text-align: center;
+  padding: 2px 0;
+}
+
+.hw-logo {
+  font-family: 'Impact', 'Arial Black', sans-serif;
+  font-style: italic;
+  font-size: 13px;
+  font-weight: 900;
+  color: #ffed00;
+  text-shadow: 
+    2px 2px 0px #e60012,
+    -1px -1px 0px #000,
+    1px -1px 0px #000,
+    -1px 1px 0px #000;
+  letter-spacing: -0.5px;
+  display: inline-block;
+  transform: skewX(-10deg);
+  transition: all 0.3s ease;
+}
+
+.hw-card:hover .hw-logo,
+.hw-card.active .hw-logo {
+  color: #ffffff;
+  text-shadow: 
+    0 0 8px #ffed00,
+    0 0 15px #ff2a00,
+    2px 2px 0px #e60012;
+  transform: skewX(-10deg) scale(1.1);
+}
+
+.hw-img-box {
+  width: 100%;
+  height: 95px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: #000;
+}
+
+.hw-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hw-footer {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  padding: 3px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.car-name {
+  color: #fff;
+  font-size: 9px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.bouquet-heart {
+  position: absolute;
+  top: 355px; 
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 26px;
+  z-index: 6;
+  filter: drop-shadow(0 0 6px rgba(255, 105, 180, 0.8));
+  animation: pulse-heart 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse-heart {
+  0%, 100% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.2); }
+}
+
+    .footer-note {
+  background: rgba(255, 255, 255, 0.75); 
+  
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  color: #111111; 
+  font-weight: 700;
+  font-size: 15px;
+  text-align: center;
+
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  padding: 12px 20px;
+  max-width: 80%;
+  margin: 15px auto 0 auto;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-img {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.card-info {
+  margin: 0;
+  color: #111111; 
+  line-height: 1.4;
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>Para ti mi amor <3</h1>
+    <strong><p class="subtitle">Toca las cartitas :3</p></strong>
+  </div>
+
+<div class="bouquet-heart">💖</div>
+
+<div class="bouquet-ribbon">
+</div>
+
+
+  <div class="bouquet-container">
+  <div class="wrapper-cone-back"></div>
+
+  <div class="cars-grid">
+  <!-- Carta 1 -->
+  <div class="hw-card card-1">
+    <div class="hw-header">
+      <span class="hw-logo">Hot Wheels</span>
+    </div>
+    <div class="hw-img-box">
+      <img src="Nissan.jpg" alt="Nissan GT-R R35">
+    </div>
+    <div class="hw-footer">
+      <span class="car-name">Nissan GT-R R35</span>
+    </div>
+  </div>
+
+  <div class="hw-card card-2">
+    <div class="hw-header">
+      <span class="hw-logo">Hot Wheels</span>
+    </div>
+    <div class="hw-img-box">
+      <img src="apollo.jpg" alt="Apollo Intesa Emozione">
+    </div>
+    <div class="hw-footer">
+      <span class="car-name">Apollo Intensa Emozione</span>
+    </div>
+  </div>
+
+  <div class="hw-card card-3">
+    <div class="hw-header">
+      <span class="hw-logo">Hot Wheels</span>
+    </div>
+    <div class="hw-img-box">
+      <img src="mazda.jpg" alt="Mazda RX-7">
+    </div>
+    <div class="hw-footer">
+      <span class="car-name">Mazda RX-7</span>
+    </div>
+  </div>
+
+  <div class="hw-card card-4">
+    <div class="hw-header">
+      <span class="hw-logo">Hot Wheels</span>
+    </div>
+    <div class="hw-img-box">
+      <img src="silvia.jpg" alt="Nissan Silvia S-5">
+    </div>
+    <div class="hw-footer">
+      <span class="car-name">Nissan Silvia S-5</span>
+    </div>
+  </div>
+
+  <div class="hw-card card-5">
+    <div class="hw-header">
+      <span class="hw-logo">Hot Wheels</span>
+    </div>
+    <div class="hw-img-box">
+      <img src="toyota.jpg" alt="Toyota GR Supra">
+    </div>
+    <div class="hw-footer">
+      <span class="car-name">Toyota GR Supra</span>
+    </div>
+  </div>
+</div>
+
+  <div class="wrapper-cone-left"></div>
+  <div class="wrapper-cone-front"></div>
+  <div class="bouquet-ribbon">
+    <div class="ribbon-loop-left"></div>
+    <div class="ribbon-knot"></div>
+    <div class="ribbon-loop-right"></div>
+    <div class="ribbon-tail-left"></div>
+    <div class="ribbon-tail-right"></div>
+  </div>
+</div>
+
+  <div class="footer-note">
+    ❤️ <b>Disculpa por dartelo tan tarde :"3 aqui esta tu ramito :3<br>
+          Te amo mucho neni, gracias por tenerme tanta paciencia,<br>
+          gracias por siempre escucharme, gracias por ser tan lindo,<br>
+          gracias por aceptarme a pesar de la distancia y los problemitas que te puedo dar,<br>
+          gracias por ser mi pareja y desear un futuro conmigo a pesar de todos mis defectos,<br>
+          gracias por siempre estar presente y por tu esfuerzo por nuestra relacion <3<br>
+          tu eres mi unico motivo para esforzarme cada dia y buscar arreglar mis defectos<br>
+          para poder vivir contigo en el futuro y crear juntos un hogar hermoso <3<br>
+          de verdad eres lo mas especial para mi, gracias por aparecer en mi vida.<br>
+          Te amo con todo mi corazon neni <3 </b>
+  </div>
+
+  <script>
+    function selectCard(card) {
+      const isAlreadyActive = card.classList.contains('active');
+      // Quitar estado activo de todos
+      document.querySelectorAll('.hw-card').forEach(c => c.classList.remove('active'));
+      // Si no estaba activo, activarlo
+      if (!isAlreadyActive) {
+        card.classList.add('active');
+      }
+    }
+  </script>
+
+</body>
+</html>
